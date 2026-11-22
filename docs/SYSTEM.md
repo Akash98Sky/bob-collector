@@ -26,32 +26,32 @@ An operator can transition an issue's status (`OPEN → IN_PROGRESS → RESOLVED
 
 ---
 
-## 2. Database Design (PostgreSQL / Supabase)
+## 2. Database Design (SQLite)
 
-To keep setup under 5 minutes, standard `FLOAT8` columns are used for coordinates (avoiding PostGIS setup overhead for the 1-hour build) across two clean tables.
+SQLite is used for zero-config local development — no server process, no migration tooling required. All types map to SQLite's flexible affinity system: UUIDs are stored as `TEXT` (generated in application code), timestamps as `TEXT` in ISO-8601 format, and coordinates as `REAL`.
 
 ```sql
 -- 1. Core Issues Table
 CREATE TABLE issues (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    category VARCHAR(32) NOT NULL CHECK (category IN ('POTHOLE', 'GARBAGE', 'STREETLIGHT', 'WATERLOGGING', 'OTHER')),
-    status VARCHAR(20) NOT NULL DEFAULT 'OPEN' CHECK (status IN ('OPEN', 'IN_PROGRESS', 'RESOLVED')),
-    description VARCHAR(280),
+    id TEXT PRIMARY KEY,                          -- UUID generated in app (e.g. Python uuid.uuid4())
+    category TEXT NOT NULL CHECK (category IN ('POTHOLE', 'GARBAGE', 'STREETLIGHT', 'WATERLOGGING', 'OTHER')),
+    status TEXT NOT NULL DEFAULT 'OPEN' CHECK (status IN ('OPEN', 'IN_PROGRESS', 'RESOLVED')),
+    description TEXT,
 
     -- Location data
-    latitude DOUBLE PRECISION NOT NULL,
-    longitude DOUBLE PRECISION NOT NULL,
-    address_label VARCHAR(255), -- Reverse-geocoded street/area name
+    latitude REAL NOT NULL,
+    longitude REAL NOT NULL,
+    address_label TEXT,                           -- Reverse-geocoded street/area name
 
-    -- Media URLs (stored in S3 / Supabase Storage / Cloudinary)
+    -- Media URLs (stored on local disk or any CDN)
     reported_image_url TEXT NOT NULL,
     resolved_image_url TEXT,
 
     -- Denormalized counter for fast sorting without JOINs
-    upvote_count INT NOT NULL DEFAULT 1,
+    upvote_count INTEGER NOT NULL DEFAULT 1,
 
-    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    resolved_at TIMESTAMPTZ
+    created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
+    resolved_at TEXT
 );
 
 -- Index for fast feed filtering and admin priority sorting
@@ -59,9 +59,9 @@ CREATE INDEX idx_issues_status_upvotes ON issues (status, upvote_count DESC, cre
 
 -- 2. Upvotes Table (Prevents duplicate clicks per browser)
 CREATE TABLE issue_upvotes (
-    issue_id UUID NOT NULL REFERENCES issues(id) ON DELETE CASCADE,
-    device_id VARCHAR(64) NOT NULL,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    issue_id TEXT NOT NULL REFERENCES issues(id) ON DELETE CASCADE,
+    device_id TEXT NOT NULL,
+    created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
     PRIMARY KEY (issue_id, device_id)
 );
 ```
