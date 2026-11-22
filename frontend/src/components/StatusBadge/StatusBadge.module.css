@@ -1,0 +1,52 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-manrope);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 14px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Open */
+.open {
+  background: var(--color-error-container);
+  color: var(--color-on-error-container);
+}
+.open .dot { background: var(--color-error); }
+
+/* In Progress */
+.inProgress {
+  background: var(--color-tertiary-fixed);
+  color: var(--color-on-tertiary-fixed);
+}
+.inProgress .dot { background: var(--color-on-tertiary-container); }
+
+/* Resolved */
+.resolved {
+  background: color-mix(in srgb, var(--color-secondary-container) 50%, transparent);
+  color: var(--color-on-secondary-container);
+}
+.resolved .dot { background: var(--color-secondary); }
+
+/* Animations */
+@keyframes ping {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(1.4); }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.dotPing { animation: ping 1.5s ease-in-out infinite; }
+.dotSpin { animation: spin 1.2s linear infinite; }

@@ -1,0 +1,578 @@
+.page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-md) var(--margin) var(--space-xl);
+  background: var(--color-background);
+}
+
+.centred {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  color: var(--color-on-surface-variant);
+  font-size: 14px;
+  min-height: 400px;
+}
+
+.content {
+  width: 100%;
+  max-width: 540px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* ── Success toast ────────────────────────────────────── */
+.successToast {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-secondary-container);
+  color: var(--color-on-secondary-container);
+  border-radius: var(--radius-lg);
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: var(--space-sm);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── Top row ──────────────────────────────────────────── */
+.topRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-on-surface-variant);
+  transition: color 0.15s;
+}
+.backLink:hover { color: var(--color-primary); }
+
+.auditBadge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--color-surface-container);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-on-surface-variant);
+}
+
+/* ── Ticket card ──────────────────────────────────────── */
+.ticketCard {
+  background: var(--color-surface-container-lowest);
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ticketTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ticketId {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ticketId h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-on-surface);
+}
+
+.copyBtn {
+  color: var(--color-outline);
+  transition: color 0.15s;
+  padding: 4px;
+}
+.copyBtn:hover { color: var(--color-primary); }
+
+.ticketMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.turnaround {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--color-surface-container-high);
+  color: var(--color-on-surface-variant);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.ticketActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.commentCount, .reportedAt {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--color-on-surface-variant);
+}
+
+/* ── Proof slider ─────────────────────────────────────── */
+.proofContainer {
+  background: var(--color-surface-container-lowest);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.proofHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md);
+  background: var(--color-surface-container-low);
+}
+.proofTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-jakarta);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-on-surface);
+}
+.dualStamp {
+  background: color-mix(in srgb, var(--color-secondary-container) 50%, transparent);
+  color: var(--color-on-secondary-container);
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.slider {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  overflow: hidden;
+  background: var(--color-inverse-surface);
+  user-select: none;
+  cursor: ew-resize;
+}
+
+.beforeLayer {
+  position: absolute;
+  inset: 0;
+}
+.beforeLayer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.afterLayer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.afterInner {
+  position: relative;
+  width: 100vw;
+  max-width: 540px;
+  height: 100%;
+}
+.afterInner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.layerGradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(40,48,68,0.8), transparent, rgba(0,0,0,0.2));
+  pointer-events: none;
+}
+
+.layerLabel {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(40,48,68,0.9);
+  backdrop-filter: blur(8px);
+  padding: 6px 12px;
+  border-radius: var(--radius);
+}
+.labelBefore {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-error-container);
+}
+.labelAfter {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-secondary-fixed);
+}
+.labelTime {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--color-inverse-on-surface);
+  margin-top: 2px;
+}
+
+.handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--color-surface-container-lowest);
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 8px rgba(0,0,0,0.5);
+}
+.handleCircle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+  flex-shrink: 0;
+}
+
+.slideHint {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  pointer-events: none;
+  background: rgba(40,48,68,0.85);
+  backdrop-filter: blur(4px);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  color: var(--color-inverse-on-surface);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.verifyRibbon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px var(--space-md);
+  background: color-mix(in srgb, var(--color-secondary-container) 20%, transparent);
+  color: var(--color-secondary);
+}
+.verifyLeft {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.verifyAccuracy {
+  font-size: 12px;
+  color: var(--color-on-surface-variant);
+}
+
+/* ── Timeline ─────────────────────────────────────────── */
+.timelineCard {
+  background: var(--color-surface-container-lowest);
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.timelineHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+}
+.timelineHeader h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-on-surface);
+}
+.completedIn {
+  background: color-mix(in srgb, var(--color-secondary-container) 40%, transparent);
+  color: var(--color-on-secondary-container);
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.timeline {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  position: relative;
+  padding-top: 8px;
+}
+
+.timelineLine {
+  position: absolute;
+  top: 20px;
+  left: 24px;
+  right: 24px;
+  height: 2px;
+  background: var(--color-secondary);
+  z-index: 0;
+}
+
+.timelineStep {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 100px;
+}
+
+.stepCircle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 8px;
+}
+
+.stepDone .stepCircle {
+  background: var(--color-secondary);
+  color: var(--color-on-secondary);
+}
+.stepActive .stepCircle {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  animation: pulse 2s ease-in-out infinite;
+}
+.stepPending .stepCircle {
+  background: var(--color-surface-container-high);
+  color: var(--color-on-surface-variant);
+}
+
+.stepLabel { font-size: 12px; font-weight: 600; color: var(--color-on-surface); }
+.stepTime  { font-size: 11px; color: var(--color-on-surface-variant); margin-top: 2px; }
+.stepSub   { font-size: 10px; color: var(--color-secondary); margin-top: 1px; }
+.stepActive .stepSub { color: var(--color-primary); }
+.stepPending .stepSub { color: var(--color-on-surface-variant); }
+
+/* ── Metadata card ────────────────────────────────────── */
+.metaCard {
+  background: var(--color-surface-container-lowest);
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.metaLocation {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.metaLocationIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius);
+  background: var(--color-surface-container);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.metaSubLabel {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-outline);
+}
+.metaAddress {
+  font-family: var(--font-jakarta);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-on-surface);
+  margin-top: 2px;
+}
+.mapsLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-primary);
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 6px;
+  transition: opacity 0.15s;
+}
+.mapsLink:hover { opacity: 0.75; }
+
+.miniMap {
+  width: 100%;
+  height: 144px;
+  border-radius: var(--radius);
+  background: var(--color-surface-container);
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px var(--color-outline-variant);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.miniMapPin {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-error);
+  color: var(--color-on-error);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-lg);
+  animation: bounce 1.5s ease-in-out infinite;
+}
+.coordPill {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(250,248,255,0.9);
+  backdrop-filter: blur(4px);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-on-surface);
+}
+.coordDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-secondary);
+}
+
+.deptRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--color-surface-container-low);
+  border-radius: var(--radius);
+  padding: 14px;
+}
+.deptIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  background: rgba(0,40,142,0.1);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.deptName {
+  font-family: var(--font-jakarta);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-on-surface);
+  margin-top: 2px;
+}
+.workOrder { font-size: 11px; color: var(--color-outline); }
+
+.supportRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-surface-container-high);
+  flex-wrap: wrap;
+}
+.avatars { display: flex; }
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-primary-container);
+  color: var(--color-on-primary);
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: 2px solid var(--color-surface-container-lowest);
+  margin-left: -8px;
+}
+.avatar:first-child { margin-left: 0; }
+.avatarMore {
+  background: var(--color-surface-container-highest);
+  color: var(--color-on-surface);
+}
+.supportCount {
+  font-family: var(--font-jakarta);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-on-surface);
+  line-height: 1.2;
+}
+.supportSub { font-size: 11px; color: var(--color-on-surface-variant); }
+
+/* Animations */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0,40,142,0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(0,40,142,0); }
+}

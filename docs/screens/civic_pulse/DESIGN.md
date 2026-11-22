@@ -1,5 +1,5 @@
 ---
-name: Civic Pulse
+name: Bob Collector
 colors:
   surface: '#faf8ff'
   surface-dim: '#d2d9f4'
